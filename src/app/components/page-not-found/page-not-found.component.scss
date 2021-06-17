@@ -1,0 +1,16 @@
+img {
+    width: 500px;
+}
+
+button {
+    margin-top: 64px;
+    mat-icon {
+        margin-right: 8px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    img {
+        width: 200px;
+    }
+}

@@ -9,11 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { Routes, RouterModule } from '@angular/router';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
-  { path: '', component: UserListComponent },
+  { path: 'users-list', component: UserListComponent },
   { path: 'add-edit', component: AddEditUserComponent },
+  { path: '', redirectTo: '/users-list', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -30,6 +35,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     MatSnackBarModule,
+    MatToolbarModule,
+    MatTableModule,
+    FlexLayoutModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

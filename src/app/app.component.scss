@@ -1,0 +1,7 @@
+$padding-size: 20px;
+$nav-menu-size: 64px;
+
+#router-wrapper {
+    padding: $padding-size;
+    height: calc(100vh - (#{$padding-size} * 2) -  #{$nav-menu-size}); 
+}

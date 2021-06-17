@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user-interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,16 +10,18 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  displayedColumns: string[] = ['status', 'username', 'email', 'edit'];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.userService.getUsersList().subscribe(res => {
       this.users = res.results;
     }, err => {
       console.error(err);
-      
-      // TODO: error handling
+
+      this.snackbar.open('Unable to retrieve user list. Please refresh and try again.', '',
+        { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
     });
   }
 

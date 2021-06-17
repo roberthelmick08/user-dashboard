@@ -9,6 +9,4 @@ import { UserListComponent } from './components/user-list/user-list.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'Jumpcloud User Dashboard';
-}
+export class AppComponent { }
