@@ -28,5 +28,4 @@ export class UserListComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }

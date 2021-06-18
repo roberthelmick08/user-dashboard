@@ -1,3 +1,50 @@
-<button mat-icon-button aria-label="Go back" routerLink="/" color="primary">
-    <mat-icon>chevron_left</mat-icon>
-</button>
+<div fxLayoutAlign="center center">
+    <div fxFlex="50" fxFlex.lt-sm="100" fxLayout="column" *ngIf="!isLoading; else loadingSpinner">
+        <div class="header" fxFlex fxLayoutAlign="space-between center">
+            <button mat-icon-button aria-label="Go back" color="primary" (click)="onCancel()">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <h1>Users</h1>
+            <span></span>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column">
+
+            <mat-form-field appearance="outline">
+                <mat-error *ngIf="form.controls.username.invalid">
+                    <p *ngIf="form.controls.username.errors?.required">Username is required.</p>
+                    <p *ngIf="form.controls.username.errors?.minlength">Username must be at least 5 characters
+                        long.</p>
+                    <p *ngIf="form.controls.username.errors?.maxlength">Username must not exceed 16 characters
+                        characters.</p>
+                </mat-error>
+                <mat-label>Enter your Username</mat-label>
+                <input matInput placeholder="Username" formControlName="username">
+                <mat-icon matSuffix>badge</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-error *ngIf="form.controls.email.invalid">
+                    <p *ngIf="form.controls.email.errors?.required">Email is required</p>
+                    <p *ngIf="form.controls.email.errors?.email">Email is not in a valid format.</p>
+                </mat-error>
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="email">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <div class="button-wrapper" fxLayoutAlign="end center">
+                <button mat-flat-button (click)="onCancel()">Cancel</button>
+                <button mat-flat-button color="accent" type="submit" [disabled]="form.invalid">Save</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<ng-template #loadingSpinner>
+    <div fxFlex fxLayoutAlign="center center">
+        <mat-spinner mode="indeterminate" color="accent" strokeWidth="4"></mat-spinner>
+    </div>
+</ng-template>
