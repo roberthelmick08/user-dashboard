@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -52,20 +52,66 @@ export class AddEditUserComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userId) {
-      this.userService.updateUser(this.userId, this.form.value);
+      this.userService.updateUser(this.userId, this.form.value).subscribe(res => {
+        this.router.navigate(['/']);
+
+        this.snackbar.open('User ' + this.form.controls.username.value + ' successfully updated!', '',
+          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+
+      }, err => {
+        console.error(err);
+
+        this.snackbar.open('Unable to update user. Please refresh and try again.', '',
+          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+      });
     } else {
-      this.userService.createUser(this.form.value);
+      this.userService.createUser(this.form.value).subscribe(res => {
+        this.router.navigate(['/']);
+
+        this.snackbar.open('User ' + this.form.controls.username.value + ' successfully created!', '',
+          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+
+      }, err => {
+        console.error(err);
+
+        this.snackbar.open('Unable to create user. Please refresh and try again.', '',
+          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+      });
     }
   }
 
   onCancel(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Are you sure?', message: 'Going back will make you lose any progress.' }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.router.navigate(['/']);
       }
     });
-    // TODO: launch confirmation modal
+  }
+
+  onDelete(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Are you sure you want to delete this user?', message: 'You will not be able to reverse this action.' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.deleteUser(this.userId || '').subscribe(res => {
+          this.router.navigate(['/']);
+
+          this.snackbar.open('Successfully deleted user!', '',
+            { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+
+        }, err => {
+          console.error(err);
+
+          this.snackbar.open('Unable to delete user. Please refresh and try again.', '',
+            { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+        });
+      }
+    });
   }
 }
