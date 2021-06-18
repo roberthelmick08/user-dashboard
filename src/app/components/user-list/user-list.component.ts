@@ -11,10 +11,12 @@ import { UserService } from 'src/app/services/user.service';
 export class UserListComponent implements OnInit {
   users: User[] = [];
   displayedColumns: string[] = ['status', 'username', 'email', 'edit'];
+  isLoading = false;
 
   constructor(private userService: UserService, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.userService.getUsersList().subscribe(res => {
       this.users = res.results;
     }, err => {
@@ -22,6 +24,8 @@ export class UserListComponent implements OnInit {
 
       this.snackbar.open('Unable to retrieve user list. Please refresh and try again.', '',
         { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+    }, () => {
+      this.isLoading = false;
     });
   }
 

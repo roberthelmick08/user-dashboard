@@ -5,7 +5,7 @@
         <button mat-flat-button color="accent" routerLink="/add-edit">Add User</button>
     </div>
 
-    <table mat-table [dataSource]="users">
+    <table mat-table [dataSource]="users" *ngIf="!isLoading; else loadingSpinner">
         <!-- Status Column -->
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
@@ -40,4 +40,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <ng-template #loadingSpinner>
+        <div fxFlex fxLayoutAlign="center center">
+            <mat-spinner mode="indeterminate" color="accent" strokeWidth="4"></mat-spinner>
+        </div>
+    </ng-template>
 </div>

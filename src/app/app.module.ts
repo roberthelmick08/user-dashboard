@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   { path: 'users-list', component: UserListComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
     FlexLayoutModule,
     MatIconModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
