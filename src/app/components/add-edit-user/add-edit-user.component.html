@@ -9,32 +9,33 @@
         </div>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column">
-
+            <mat-error *ngIf="form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)">
+                <p *ngIf="form.controls.username.errors?.required">Username is required.</p>
+                <p *ngIf="form.controls.username.errors?.minlength">Username must be at least 5 characters
+                    long.</p>
+                <p *ngIf="form.controls.username.errors?.maxlength">Username must not exceed 16 characters
+                    characters.</p>
+                <p *ngIf="form.controls.username.errors?.pattern">Username may only contain alphanumeric characters.</p>
+            </mat-error>
             <mat-form-field appearance="outline">
-                <mat-error *ngIf="form.controls.username.invalid">
-                    <p *ngIf="form.controls.username.errors?.required">Username is required.</p>
-                    <p *ngIf="form.controls.username.errors?.minlength">Username must be at least 5 characters
-                        long.</p>
-                    <p *ngIf="form.controls.username.errors?.maxlength">Username must not exceed 16 characters
-                        characters.</p>
-                </mat-error>
-                <mat-label>Enter your Username</mat-label>
+                <mat-label>Enter your Username *</mat-label>
                 <input matInput placeholder="Username" formControlName="username">
                 <mat-icon matSuffix>badge</mat-icon>
             </mat-form-field>
 
+            <mat-error *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)">
+                <p *ngIf="form.controls.email.errors?.required">Email is required</p>
+                <p *ngIf="form.controls.email.errors?.email">Email is not in a valid format.</p>
+            </mat-error>
             <mat-form-field appearance="outline">
-                <mat-error *ngIf="form.controls.email.invalid">
-                    <p *ngIf="form.controls.email.errors?.required">Email is required</p>
-                    <p *ngIf="form.controls.email.errors?.email">Email is not in a valid format.</p>
-                </mat-error>
-                <mat-label>Enter your email</mat-label>
+                <mat-label>Enter your email *</mat-label>
                 <input matInput placeholder="pat@example.com" formControlName="email">
                 <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
 
             <div class="button-wrapper" fxLayoutAlign="space-between center">
-                <button mat-flat-button (click)="onDelete()" type="button" *ngIf="userId; else placeholderSpan" color="warn">Delete</button>
+                <button mat-flat-button (click)="onDelete()" type="button" *ngIf="userId; else placeholderSpan"
+                    color="warn">Delete</button>
                 <ng-template #placeholderSpan><span></span></ng-template>
                 <div>
                     <button mat-flat-button type="button" (click)="onCancel()">Cancel</button>

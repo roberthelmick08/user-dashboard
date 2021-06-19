@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AddEditUserComponent } from './components/add-edit-user/add-edit-user.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
@@ -20,6 +19,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   { path: 'users-list', component: UserListComponent },
@@ -53,6 +53,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent],

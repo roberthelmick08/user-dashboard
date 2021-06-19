@@ -22,10 +22,9 @@ export class AddEditUserComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('uid');
 
     this.form = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(16)]],
+      username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9 \'\-]+$')]],
       email: ['', [Validators.required, Validators.email]]
     });
-
   }
 
   ngOnInit(): void {
