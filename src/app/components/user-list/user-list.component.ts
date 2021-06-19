@@ -23,7 +23,7 @@ export class UserListComponent implements OnInit {
       console.error(err);
 
       this.snackbar.open('Unable to retrieve user list. Please refresh and try again.', '',
-        { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+        { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
     }, () => {
       this.isLoading = false;
     });

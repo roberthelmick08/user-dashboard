@@ -39,8 +39,8 @@ export class AddEditUserComponent implements OnInit {
       }, err => {
         console.error(err);
 
-        this.snackbar.open('Unable to retrieve user. Please refresh and try again.', '',
-          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+        this.snackbar.open(err.error || 'Unable to retrieve user. Please refresh and try again.', '',
+          { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
       }, () => {
         this.isLoading = false;
       });
@@ -55,26 +55,26 @@ export class AddEditUserComponent implements OnInit {
         this.router.navigate(['/']);
 
         this.snackbar.open('User ' + this.form.controls.username.value + ' successfully updated!', '',
-          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+          { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
 
       }, err => {
         console.error(err);
 
-        this.snackbar.open('Unable to update user. Please refresh and try again.', '',
-          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+        this.snackbar.open(err.error || 'Unable to update user. Please refresh and try again.', '',
+          { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
       });
     } else {
       this.userService.createUser(this.form.value).subscribe(res => {
         this.router.navigate(['/']);
 
         this.snackbar.open('User ' + this.form.controls.username.value + ' successfully created!', '',
-          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+          { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
 
       }, err => {
         console.error(err);
 
-        this.snackbar.open('Unable to create user. Please refresh and try again.', '',
-          { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+        this.snackbar.open(err.error || 'Unable to create user. Please refresh and try again.', '',
+          { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
       });
     }
   }
@@ -102,13 +102,13 @@ export class AddEditUserComponent implements OnInit {
           this.router.navigate(['/']);
 
           this.snackbar.open('Successfully deleted user!', '',
-            { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+            { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
 
         }, err => {
           console.error(err);
 
-          this.snackbar.open('Unable to delete user. Please refresh and try again.', '',
-            { duration: 500, horizontalPosition: 'center', verticalPosition: 'top' });
+          this.snackbar.open(err.error || 'Unable to delete user. Please refresh and try again.', '',
+            { duration: 5000, horizontalPosition: 'center', verticalPosition: 'top' });
         });
       }
     });
